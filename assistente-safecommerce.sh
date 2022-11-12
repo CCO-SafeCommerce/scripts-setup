@@ -13,7 +13,7 @@ url_jar_gui="https://raw.githubusercontent.com/CCO-SafeCommerce/SafeCommerceClie
 
 erro_setup_java=0
 setup_java(){
-    while [ $erro_setup_python -eq 0 ]; do
+    while [ $erro_setup_java -eq 0 ]; do
         versao_java=$(java -version)
         if [ $versao_java -ne $versao_alvo_java ]; then
             if [ $versao_java -eq 0 ]; then
