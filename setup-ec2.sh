@@ -8,20 +8,15 @@ url_jar_gui="https://raw.githubusercontent.com/CCO-SafeCommerce/SafeCommerceClie
 repo_python="https://github.com/CCO-SafeCommerce/API-Python.git"
 
 echo "SetUp da EC2"
-echo "Criando alias para atualizar EC2"
+echo "Criando atualizando EC2"
 sleep 2
-echo "alias atualizar='sudo apt update && sudo apt upgrade'" >> $HOME/.bash_aliases
-source .bash_aliases
-
-echo "Atualizando EC2 com alias"
-sleep 2
-atualizar
+sudo apt update && sudo apt upgrade
 
 echo "Criando diretório do projeto"
 sleep 2
 mkdir projeto
-cd projeto
 
+cd projeto
 echo "Clonando repositório do site"
 sleep 2
 git clone $repo_site
@@ -33,9 +28,10 @@ if [ -d "safecommerce" ]; then
     echo "Preparando NodeJS"
     sleep 2
 
-    cd /safecommerce/site
+    echo $PWD
+    cd projeto/safecommerce/site
     npm i
-    
+
     repo_site_clone=1
 else
     echo "Falha no clone"
@@ -55,7 +51,7 @@ echo "Instalando docker.io"
 sleep 2
 sudo apt install docker.io
 
-if [ command -v docker ]; then
+if [ ! command -v docker &> /dev/null ]; then
     sudo systemctl start docker
     sudo systemctl enable docker
 
@@ -78,7 +74,8 @@ if [ command -v docker ]; then
 
         echo "Carregando script SQL de criação do banco"
         sleep 2
-        cd /safecommerce/site/src/database
+        echo $PWD
+        cd projeto/safecommerce/site/src/database
         sql_script=$(cat Script2.0.sql)
 
         echo "Criando banco de dados"
