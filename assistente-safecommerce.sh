@@ -1,10 +1,10 @@
 #!/bin/bash
 
-white=$(tput setaf 255)
-orange=$(tput setaf 202)
-yellow=$(tput setaf 011)
-red=$(tput setaf 001)
-green=$(tput setaf 028)
+white="(tput setaf 255)"
+orange="(tput setaf 202)"
+yellow="(tput setaf 011)"
+red="(tput setaf 001)"
+green="(tput setaf 028)"
 bot="$orange[Assistente SafeCommerce]:$white"
 
 versao_alvo_java=11
@@ -14,7 +14,13 @@ url_jar_gui="https://raw.githubusercontent.com/CCO-SafeCommerce/SafeCommerceClie
 erro_setup_java=0
 setup_java(){
     while [ $erro_setup_java -eq 0 ]; do
-        versao_java=$(java -version)
+        which java | grep -q /usr/bin/java
+
+        versao_java=0
+        if [ ! $? == 0 ]; 
+            versao_java=$(java -version)
+        fi
+
         if [ $versao_java -ne $versao_alvo_java ]; then
             if [ $versao_java -eq 0 ]; then
                 echo "$bot$yellow AVISO!!!$white Não encontramos o Java instalado na sua máquina."
