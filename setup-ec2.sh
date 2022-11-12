@@ -20,19 +20,8 @@ cd projeto
 echo "Clonando repositório do site"
 sleep 2
 git clone $repo_site
-
-repo_site_clone=0
 if [ -d "safecommerce" ]; then
     echo "Clonado com sucesso"
-
-    echo "Preparando NodeJS"
-    sleep 2
-
-    echo $PWD
-    cd projeto/safecommerce/site
-    npm i
-
-    repo_site_clone=1
 else
     echo "Falha no clone"
 fi
@@ -64,27 +53,6 @@ if [ $(command -v docker) == "/usr/bin/docker" ]; then
     echo "Criando container MySQL"
     sleep 2
     sudo docker run -d -p 3306:3306 --name "MySQLDocker" -e "MYSQL_ROOT_PASSWORD=urubu100" mysql:5.7
-
-    if [ $repo_site_clone -eq 1 ]; then
-        id_mysql_docker=$(docker container list -q)
-
-        echo "Iniciando container MySQL"
-        sleep 2
-        docker start MySQL
-
-        echo "Carregando script SQL de criação do banco"
-        sleep 2
-        echo $PWD
-        cd projeto/safecommerce/site/src/database
-        sql_script=$(cat Script2.0.sql)
-
-        echo "Criando banco de dados"
-        sudo docker exec -it $id_mysql_docker bash
-        mysql -u root -p urubu100 
-        sql_script
-    fi
-
-
 else
     echo "Falha na instalação do docker"
 fi
