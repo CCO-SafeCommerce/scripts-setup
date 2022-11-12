@@ -51,7 +51,7 @@ echo "Instalando docker.io"
 sleep 2
 sudo apt install docker.io
 
-if [ ! command -v docker &> /dev/null ]; then
+if [ $(command -v docker) == "/usr/bin/docker" ]; then
     sudo systemctl start docker
     sudo systemctl enable docker
 
