@@ -82,11 +82,6 @@ setup_java(){
     done
 }
 
-erro_setup_python=0
-setup_python(){
-
-}
-
 instalar_jar_gui(){
     echo "$BOT$GREEN SUCESSO!!!$WHITE Todas as depedências necessárias para a aplicação funcionar foram instaladas com sucesso"
     echo "$BOT Instalando aplicação de coleta para monitoramento da máquina"
@@ -98,11 +93,6 @@ instalar_jar_gui(){
     else
         echo "$BOT$RED FALHA!!!$WHITE Não foi possível instalar a aplicação!"
     fi
-}
-
-erro_api_py=0
-instalar_api_py(){
-
 }
 
 echo "$bot Bem vindo ao assistente de instalação da aplicação de coleta para o monitoramento do servidor!"
